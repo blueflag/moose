@@ -14,20 +14,29 @@ At its core Moose aims to provide clear descriptions of the parts that make up a
 If we can describe these parts correctly it becomes easy to label and categorise the distinct parts 
 of our apps. Once categorised, code structure and responsibility becomes much easier to organize.
 
+## Clientside Concerns
+The client side code has six clear areas of concern:
 
-The client side code has five clear areas of concern:
-
-* Data fetching and storage
+* Data fetching
+* Data Storage
 * Application logic
 * User Interaction Logic
 * Positional Styles (Layout)
 * Aesthetic Styles (Component Styles)
+
+_Broadly speaking you can split these five areas of concern into two main categories. Application and 
+Interaction. Application is concerned with data and how it is stored and transformed to be rendered.
+Interaction is concerned with how things look and feel and how the user interacts with them._
 
 
 ### Data Fetching
 This concern describes how data is fetched from exterior sources and where it is stored once it 
 arrives. Your views do not care where the data came from or how it is stored. They just need to know
 when it is safe to render. This concern should be separated from the other parts of your app. 
+
+### Data Storage
+Often labelled as state management, this concern describes how data fetched from API's is stored 
+in memory throughout your app.
 
 ### Application Logic
 Often confused with business logic. Application logic is the specific ways that your data structures
@@ -59,34 +68,41 @@ to move and refactor. Positional styles are a unique concern and should be separ
 of you app.
 
 
-## Application / Interaction
-Broadly speaking you can split these five areas of concern into two main categories. Application and 
-Interaction. Application is concerned with data and how it is stored and transformed to be rendered.
-Interaction is concerned with how things look and feel and how the user interacts with them.
-
-
-
 # Moose Terms
-With these areas of concern in place we can now start to talk about how Moose solves these problems.
-
-
+With these areas of concern in place we can now start to talk about how Moose categorises them.
+Moose starts from the lowest most general concerns and works it's way up to the higher and more specific.
 
 ## Affordance
-Affordances are the lowest and most abstract parts of an application. They let the user interact in
+An affordance is a component that affords the user a single action.
+
+* Text affords the user reading
+* Button affords the user clicking
+* Input affords the user typing
+
+They are the lowest and most abstract parts of an application. They let the user interact in
 some way, but only in the most general sense. By themselves they are useless, but when given some
-business logic they become useful.
+business logic they become useful. Affordances are similar in this respect to 'dumb' components: 
+They are small and single purpose. Affordances differ from dumb components in that they must be 
+general. A save button is not an affordance, but a button is. A friend list is not an affordance but
+a user list is.
 
 ### Example
-A button affords the user to click. The component should describe how best to do that. I.e a click-handler
-some text and some button-like styles. But it cant describe what that click should perform. 
-A callback and a label must be provided to the button before it makes sense.
+A button affords the user to click. The button affordance should describe how best to do that. 
+i.e. a click-handler, some text, and some button-like styles. Importantly the button cant describe 
+what that click should perform. A specific callback and label must be provided to the button before 
+it makes sense.
+
 
 ### Rules
-Affordances can contain interaction logic and aesthetic styles. 
-Affordances cannot contain application logic or data fetching. 
-Affordances in themselves can contain some layout styles. But they cannot control the layout of their 
-surrounds.
-Affordances must be declared in their own file. They cannot be declared ad-hoc.
+* Affordances can contain interaction logic
+* Affordances can contain aesthetic styles. 
+* Affordances can contain layout styles. But only the to control internal positioning, they cannot
+influence surrounding components.
+* Affordances can contain other affordances.
+* Affordances cannot contain application logic.
+* Affordances cannot contain data fetching. 
+* Affordances must only have one concern.
+* Affordances must be declared in their own file; they cannot be declared ad-hoc.
 
 
 ## Appliance
@@ -105,11 +121,40 @@ Appliances cannot fetch data.
 Appliances can be in its own file.
 Appliance can be declared ad-hoc in a structure.
 
+## Layout
+* Layouts can contain positional affordances
+* Layouts can perform a null check before rendering an element
+* Layouts cannot contain aesthetic affordances
+* Layouts cannot declare aesthetic styles
+* Layouts cannot contain interaction logic
+* Layouts cannot contain application logic
 
 ## Structure
-## Layout
+Structures bind data and application logic to affordances and layouts. In the process creating 
+appliances. Appliances can be created ad-hoc in the structures or if common they can be moved out 
+to their own file.
+
+Structures are the glue between your specific data and your general affordances.
+Structure are where your application logic is realised. 
+
+
+### Example
+If you take a list of coffee shops and bind them to a table affordance, placing it in the body of a
+profile layout. You have started to create the application logic of the coffee shop profile page by
+creating a coffee shop table appliance and placing the body of the page.
+
+### Rules
+* Structures can declare ad-hoc appliances
+* Structures cannot fetch data
+* Structures cannot store data
+* Structures cannot contain interaction logic
+
 ## View
 
+* Views can contain data fetching code.
+* Views are specific
+* Views can have a one to one relationship to a structure
+* Views don't have to be a component. (Hoc chain)
 
 
 

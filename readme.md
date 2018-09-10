@@ -10,9 +10,9 @@ application specific 'smart' components.
 What the front-end really needs is a way to talk about interfaces that effectively separates its concerns. 
 
 ## Core Ideas
-At its core Moose aims to provide clear descriptions of the parts that make up a client-side application.
-If we can describe these parts correctly it becomes easy to label and categorise the distinct parts 
-of our apps. Once categorised, code structure and responsibility becomes much easier to organize.
+Moose aims to provide clear descriptions of the parts that make up a client-side application.
+If we can describe these parts correctly it becomes easy to label and categorise the areas of our 
+apps. Once categorised, code structure and responsibility becomes much easier define.
 
 ## Clientside Concerns
 The client side code has six clear areas of concern:
@@ -53,19 +53,20 @@ in response. It is a separate concern from application logic because it doesn't 
 given or where it came from, just how that data should respond to the users interaction. This concern
 should be separate from other parts of you app.
 
-## Aesthetic Styles
+### Aesthetic Styles
 Aesthetic styles describe how your individual components should look. Libraries and methodologies,
 like Bootstrap, Atomic Design etc. have got this right. You can describe all possible states of a 
 button quite clearly and all the code required to define how a button looks should be separate from 
 other parts of your app.
 
-## Positional Styles
+### Positional Styles
 Positional styles describe how the different parts of your app relate to each other in position. 
 Grids, floats, text spacing all fall under this category. Component libraries often become bloated 
 and confused when positional styles are combined with aesthetic ones. Class names like 
 `.marginLeftLarge` and `paddingTopExtraSmall` become littered throughout the app, making things hard 
 to move and refactor. Positional styles are a unique concern and should be separate for other parts 
 of you app.
+
 
 
 # Moose Terms

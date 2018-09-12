@@ -106,6 +106,7 @@ influence surrounding components.
 * Affordances must be declared in their own file; they cannot be declared ad-hoc.
 
 
+
 ## Appliance
 An appliance is an affordance bound to data or application logic. A button by itself is just an
 affordance but a button with a "Save" label and callback that triggers the save API is an appliance.
@@ -117,18 +118,24 @@ button. Each is its own unique appliance.
 ### Example
 
 ### Rules
-Appliances can contain one or many affordances.
-Appliances cannot fetch data.
-Appliances can be in its own file.
-Appliance can be declared ad-hoc in a structure.
+* Appliances can contain one or many affordances.
+* Appliances can be in its own file.
+* Appliances can be declared ad-hoc in a structure.
+* Appliances cannot fetch data.
+
+
 
 ## Layout
+### Example
+### Rules
 * Layouts can contain positional affordances
 * Layouts can perform a null check before rendering an element
 * Layouts cannot contain aesthetic affordances
 * Layouts cannot declare aesthetic styles
 * Layouts cannot contain interaction logic
 * Layouts cannot contain application logic
+
+
 
 ## Structure
 Structures bind data and application logic to affordances and layouts. In the process creating 
@@ -137,7 +144,6 @@ to their own file.
 
 Structures are the glue between your specific data and your general affordances.
 Structure are where your application logic is realised. 
-
 
 ### Example
 If you take a list of coffee shops and bind them to a table affordance, placing it in the body of a
@@ -150,8 +156,19 @@ creating a coffee shop table appliance and placing the body of the page.
 * Structures cannot store data
 * Structures cannot contain interaction logic
 
-## View
 
+
+## View
+Views bind data to your structures. They orchestrate what data is fetched, and when it returns they 
+provide it to the structure. The structure defines an api for what data it requires to render 
+correctly. It is up to the view to make sure that data is given to it. 
+
+### Example
+Our coffee shop profile page structure needs data before it can render. It needs a list of coffee 
+shops, information on the state of the request. The coffee shop
+profile view should then fetch the required list of coffee shops and pass them to the view.
+
+### Rules
 * Views can contain data fetching code.
 * Views are specific
 * Views can have a one to one relationship to a structure
